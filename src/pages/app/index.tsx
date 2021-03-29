@@ -43,18 +43,6 @@ const App = () => {
             )}
           />
           <Route
-            path="/app"
-            render={(routeProps) => (
-              <LayoutMain {...routeProps}>
-                <Switch>
-                  {RouterMain.map((router, index) => renderRouter(router, routeProps))}
-                  <Redirect to="/admin/dashboard" from="/admin" exact />
-                  {/* <Redirect to="/404" /> */}
-                </Switch>
-              </LayoutMain>
-            )}
-          />
-          <Route
             path="/"
             render={(routeProps) => (
               <LayoutBlank {...routeProps}>

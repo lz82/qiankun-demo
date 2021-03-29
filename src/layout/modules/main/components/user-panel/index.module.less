@@ -1,0 +1,48 @@
+.user-panel-wrapper {
+  padding: 0 10px;
+  .btn {
+    color: #545454;
+    font-size: 12px;
+    cursor: pointer;
+
+    &:first-child:after {
+      content: '';
+      font-size: 0;
+      padding: 10px 3px 1px;
+      margin-right: 5px;
+      border-right: solid 1px #545454;
+    }
+
+    &:hover {
+      color: @primary-color;
+    }
+  }
+  .info-wrapper {
+    height: 50px;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+
+    .btn-dashboard {
+      margin-right: 25px;
+    }
+
+    .icon-btn {
+      font-size: 24px;
+      cursor: pointer;
+
+      :hover {
+        color: @primary-color;
+      }
+    }
+    .bell-wrapper {
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
+      position: relative;
+    }
+    .user {
+      margin-left: 25px;
+    }
+  }
+}
