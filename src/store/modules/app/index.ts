@@ -2,11 +2,12 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AppThunk, RootState } from '@/store';
 import { getToken, setToken as setTokenInCookie } from '@/utils/auth';
 import { appApi } from '@/services';
-import { IGetUserInfoResponse } from '@/services/app/types';
+import { ICheckLoginRequest, IGetUserInfoResponse } from '@/services/app/types';
 interface AppState {
   token: string;
   errMsg: string;
   userInfo: IGetUserInfoResponse;
+  menuCollapsed: boolean;
 }
 
 const initialState: AppState = {
@@ -16,7 +17,8 @@ const initialState: AppState = {
     username: 'lz',
     age: 18,
     gender: 'M'
-  }
+  },
+  menuCollapsed: false
 };
 
 export const appSlice = createSlice({
@@ -41,17 +43,27 @@ export const appSlice = createSlice({
     },
     setUserInfo: (state, action: PayloadAction<IGetUserInfoResponse>) => {
       state.userInfo = action.payload;
+    },
+    toggleMenuCollapsed: (state) => {
+      state.menuCollapsed = !state.menuCollapsed;
     }
   }
 });
 
-export const { setToken, clearToken, setErrMsg, clearErrMsg, setUserInfo } = appSlice.actions;
+export const {
+  setToken,
+  clearToken,
+  setErrMsg,
+  clearErrMsg,
+  setUserInfo,
+  toggleMenuCollapsed
+} = appSlice.actions;
 
 // The function below is called a thunk and allows us to perform async logic. It
 // can be dispatched like a regular action: `dispatch(incrementAsync(10))`. This
 // will call the thunk with the `dispatch` function as the first argument. Async
 // code can then be executed and other actions can be dispatched
-export const checkLogin = (data: any): AppThunk => async (dispatch) => {
+export const checkLogin = (data: ICheckLoginRequest): AppThunk => async (dispatch) => {
   try {
     const { token } = await appApi.checkLogin(data);
     setTokenInCookie(token);
@@ -76,5 +88,6 @@ export const getUserInfo = (token: string): AppThunk => async (dispatch) => {
 export const selectToken = (state: RootState) => state.app.token;
 export const selectErrMsg = (state: RootState) => state.app.errMsg;
 export const selectUserInfo = (state: RootState) => state.app.userInfo;
+export const selectMenuCollapsed = (state: RootState) => state.app.menuCollapsed;
 
 export default appSlice.reducer;

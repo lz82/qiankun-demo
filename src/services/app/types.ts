@@ -1,7 +1,7 @@
 export interface ICheckLoginRequest {
   username: string;
   password: string;
-  verifyCode: string;
+  verifyCode?: string;
 }
 
 export interface ICheckLoginResponse {

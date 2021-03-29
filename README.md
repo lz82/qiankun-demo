@@ -98,3 +98,11 @@ declare module '*.jpg';
 - 使用`normalize.css`来重置样式
 - 使用`corj-js`和`react-app-polyfill`来支持 IE 浏览器
 - 使用`classnames`来进行`classname`管理
+
+## qiankun
+
+在`/src/layout/modules/main/index.tsx`中引用`qiankun`
+
+## todo
+
+使用自定义 hook 重构`request`
